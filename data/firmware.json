@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "product": {
+    "supported_model": "8BitDo Ultimate 2C Wireless Controller",
+    "target_transport": "Bluetooth LE",
+    "not_supported_models_or_targets": [
+      "8BitDo Ultimate 2C Bluetooth Controller",
+      "8BitDo Ultimate 2 Controller",
+      "USB wireless receiver"
+    ],
+    "normal_usb_identity": {"vid": "0x2dc8", "pid": "0x310a"},
+    "recovery_usb_identity": {"vid": "0x2dc8", "pid": "0x3208"},
+    "stock_ble_pnp": {
+      "vendor_id_source": 2,
+      "vid": "0x2dc8",
+      "pid": "0x301b",
+      "version": "0x0001"
+    },
+    "patched_ble_pnp": {
+      "vendor_id_source": 2,
+      "vid": "0x2dc8",
+      "pid": "0x6002",
+      "version": "0x0001",
+      "compatibility_profile": "SN30 Pro+",
+      "note": "Identity-only compatibility patch; not SN30 Pro+ firmware."
+    }
+  },
+  "firmware": {
+    "version": "1.09",
+    "official_url": "http://dl.8bitdo.com:8080/firmwareFile/upload/3652c29e-7b6c-4521-9426-abf153e7298b.dat",
+    "download_security": "Plain HTTP has no transport authentication or confidentiality. No credentials or authentication are used. The pinned SHA-256 identifies the exact independently recorded stock bytes; changed vendor bytes are unsupported.",
+    "original": {
+      "length_bytes": 74780,
+      "sha256": "87349e603bb92d6ae9ff6defb6f32b10de2f2d3252fe4e442fa7993f982f2a5a"
+    },
+    "patched": {
+      "length_bytes": 74780,
+      "sha256": "e52216167e7f3f5e0a15d14b68b345b54a12a8b637b1052ddc1d595a0a57c88f"
+    },
+    "layout": {
+      "offset_convention": "DAT file offsets are zero-based; all range ends are exclusive.",
+      "wrapper": {
+        "dat_start": "0x00000",
+        "dat_end_exclusive": "0x0001c",
+        "length_bytes": 28,
+        "encoding": "seven little-endian uint32 words",
+        "words": [109, 24576, 74752, 12315, 2753617091, 0, 0]
+      },
+      "application": {
+        "dat_start": "0x0001c",
+        "dat_end_exclusive": "0x1241c",
+        "length_bytes": 74752,
+        "flash_start": "0x06000",
+        "flash_end_exclusive": "0x18400",
+        "telink_image_size_including_crc": "0x12274"
+      },
+      "gatt_table_dat_offset": "0x11458",
+      "pnp_handle": "0x000e",
+      "pnp_value_dat_offset": "0x113dc",
+      "pnp_value_length_bytes": 7,
+      "ble_report_descriptor": {
+        "dat_offset": "0x11368",
+        "length_bytes": 116,
+        "sha256": "faf72db6502aec039db8e5c163c3f01e6f2c16486439d1dece7b91b140e32a58",
+        "unchanged_by_patch": true
+      }
+    },
+    "crc": {
+      "algorithm": "bitwise complement of zlib.crc32(application bytes before the stored CRC), masked to uint32",
+      "coverage_dat_start": "0x0001c",
+      "coverage_dat_end_exclusive": "0x1228c",
+      "stored_dat_offset": "0x1228c",
+      "stored_length_bytes": 4,
+      "stored_encoding": "little-endian uint32",
+      "original": "0xa8be5c24",
+      "patched": "0xa204a342"
+    },
+    "exact_changed_dat_bytes": [
+      {"offset": "0x113df", "before": "0x1b", "after": "0x02", "field": "BLE PnP product ID low byte"},
+      {"offset": "0x113e0", "before": "0x30", "after": "0x60", "field": "BLE PnP product ID high byte"},
+      {"offset": "0x1228c", "before": "0x24", "after": "0x42", "field": "Telink CRC byte 0"},
+      {"offset": "0x1228d", "before": "0x5c", "after": "0xa3", "field": "Telink CRC byte 1"},
+      {"offset": "0x1228e", "before": "0xbe", "after": "0x04", "field": "Telink CRC byte 2"},
+      {"offset": "0x1228f", "before": "0xa8", "after": "0xa2", "field": "Telink CRC byte 3"}
+    ]
+  },
+  "evidence": {
+    "status": "experimental; tested on one unit; no universal compatibility guarantee",
+    "tested_units": 1,
+    "macos_version": "26.6",
+    "macos_build": "25G83",
+    "mac_native_input": "All four stick axes reached -1 and +1 and returned to zero; cardinal D-pad directions and releases were observed.",
+    "tvos_result": "User confirmed operation after fresh pairing; not directly instrumented.",
+    "tvos_version": null,
+    "apple_tv_model": null,
+    "game": null,
+    "unrecorded_fields_note": "Exact tvOS version, Apple TV model, and game were not recorded."
+  }
+}

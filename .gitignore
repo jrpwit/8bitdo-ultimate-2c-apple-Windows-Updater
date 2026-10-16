@@ -1,0 +1,12 @@
+# Firmware, per-device backups, generated binaries and local captures are private.
+/work/
+/build/
+*.dat
+*.bin
+*.log
+*.zip
+*.dmg
+*.app/
+__pycache__/
+*.py[cod]
+.DS_Store
