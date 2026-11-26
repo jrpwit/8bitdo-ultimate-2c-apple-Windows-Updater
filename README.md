@@ -2,7 +2,7 @@
 
 An experimental, identity-only firmware patch for the **8BitDo Ultimate 2C Wireless Controller** (the Windows/Android model).
 
-You run this installer from a **Windows PC**. After patching, the controller presents the Bluetooth identity of an **SN30 Pro+**, so **macOS and Apple TV** recognize its existing input reports. No Mac is required to install or flash the controller.
+You run this updater from a **Windows PC**. After patching, the controller presents the Bluetooth identity of an **SN30 Pro+**, so **macOS and Apple TV** recognize its existing input reports. No Mac is required to run it or flash the controller.
 
 > **Windows is only the flashing host.** This patch does **not** install a Windows driver and does not promise better Windows behavior. It does **not** install SN30 Pro+ firmware, add rumble, or add motion support. After patching, Windows may label the Bluetooth controller as an SN30 Pro+; that is expected.
 
@@ -26,6 +26,44 @@ Only **six bytes** of the exact official firmware v1.09:
 Everything else stays unchanged: executable code, the 116-byte Bluetooth report descriptor, report layout, radio stack, button scanning, and the USB identity.
 
 The patch was selected because the SN30 Pro+ profile understands this controller's report ranges. Apple TV operation was confirmed by the original tester after fresh pairing. This is not an official 8BitDo update, not Apple certification, and not a universal compatibility guarantee.
+
+## Official 8BitDo firmware updates — read this first
+
+This project patches **only official firmware v1.09**. It does not support newer firmware versions, and a vendor update can overwrite the compatibility patch.
+
+If you need to update the controller's stock firmware or recover it, 8BitDo provides **Ultimate Software V2**:
+
+```text
+https://app.8bitdo.com/Ultimate-Software-V2/
+```
+
+### Update via Ultimate Software V2 (Windows or macOS)
+
+1. Download and install **8BitDo Ultimate Software V2** for your operating system. If it downloads as a `.zip`, extract it first.
+2. Keep the controller unplugged while opening the application.
+3. Connect the controller with a USB-C cable and turn it on. For the Ultimate 2C **Bluetooth** model, if it is not detected immediately, turn it off, hold **L1 + R1**, and plug it in via USB.
+4. Select the firmware/update option, choose the latest firmware version, and click **Update**.
+5. Leave the cable connected until the progress bar finishes and the controller vibrates or confirms completion. Then unplug it.
+
+> The **L1 + R1** recovery note applies to the Ultimate 2C **Bluetooth (Switch)** model. That model is **not supported by this patch**. This project targets the Ultimate 2C Wireless (Windows/Android) model.
+
+> **Do not use the vendor updater as a shortcut to install this patch.** The official updater installs 8BitDo's latest firmware, which may be newer than v1.09. This project's pinned hashes, offsets and patch cannot be applied to a different version.
+
+After any vendor update, connect in normal USB mode and verify the real application version:
+
+```bat
+windows\read-firmware.bat
+```
+
+This workflow requires:
+
+```text
+Telink image header. Installed firmware version: 1.09 (raw 109).
+```
+
+If it reports anything else, **stop**. Do not run `--flash` or `--restore` with this repository's pinned v1.09 artifacts. If you want to use the vendor updater after patching, restore the stock firmware first; otherwise the update may overwrite the compatibility patch.
+
+The exact v1.09 image used by this guide is obtained with `windows\fetch-firmware.bat` in section 4. The official updater is for normal stock maintenance and recovery, not for reproducing the pinned v1.09 starting point.
 
 ## What the Windows port adds
 

@@ -438,6 +438,34 @@ It verifies before reset. Do not unplug during the restore.
 Pair again from scratch after restoring. This is a recovery capability, not a
 guarantee against every possible failure.
 
+## Official 8BitDo firmware updates
+
+This project patches **only v1.09** and cannot be applied to a newer vendor
+version. A vendor update can also overwrite the compatibility patch.
+
+For normal stock updates or recovery, use 8BitDo Ultimate Software V2:
+
+```text
+https://app.8bitdo.com/Ultimate-Software-V2/
+```
+
+Windows/macOS vendor procedure:
+
+1. Install Ultimate Software V2; extract the ZIP first if needed.
+2. Open the application with the controller unplugged.
+3. Connect the controller by USB-C and turn it on. For the Ultimate 2C
+   **Bluetooth** model, if it is not detected, turn it off, hold **L1 + R1**,
+   and plug it in. That model is **not supported by this patch**.
+4. Choose the firmware/update option, select the latest version, and click
+   **Update**.
+5. Keep the cable connected until the progress completes and the controller
+   vibrates or confirms completion, then unplug it.
+
+Afterward, run `windows\read-firmware.bat`. If it does not report **1.09**, do
+not use this repository's pinned `--flash`/`--restore` artifacts. The official
+updater is not a source for the exact pinned v1.09 image; use
+`windows\fetch-firmware.bat` for that.
+
 ## Troubleshooting
 
 | Symptom | What to do |
