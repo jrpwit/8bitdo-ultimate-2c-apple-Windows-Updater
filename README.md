@@ -174,8 +174,8 @@ If `python` opens the Microsoft Store, install python.org Python and turn off **
 **Option B — Git:**
 
 ```bat
-git clone https://github.com/jrpwit/8bitdo-ultimate-2c-apple-Windows-installer.git
-cd 8bitdo-ultimate-2c-apple-Windows-installer
+git clone https://github.com/jrpwit/8bitdo-ultimate-2c-apple-Windows-Updater.git
+cd 8bitdo-ultimate-2c-apple-Windows-Updater
 ```
 
 Open **Command Prompt inside the project folder**. Tip: click the File Explorer address bar, type `cmd`, and press Enter.
