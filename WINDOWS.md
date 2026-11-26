@@ -205,7 +205,41 @@ dangling-symlink fixture is expected to appear as `skipped` on Windows. Open a
 new Command Prompt afterward (or run `set EIGHTBITDO_STOCK_DAT=`) to clear that
 variable.
 
-## 5. Read and preserve YOUR controller's stock state
+## 5. Update to official v1.09 — read this first
+
+This project patches **only v1.09**. **As of 2025, v1.09 is the latest official
+8BitDo firmware for the Ultimate 2C Wireless.** Controllers often ship with
+older stock firmware, so update to v1.09 with Ultimate Software V2 before
+making the section 6 backups. A vendor update can also overwrite the
+compatibility patch, so restore stock first if you update after patching.
+
+Use 8BitDo Ultimate Software V2:
+
+```text
+https://app.8bitdo.com/Ultimate-Software-V2/
+```
+
+Windows/macOS vendor procedure:
+
+1. Install Ultimate Software V2; extract the ZIP first if needed.
+2. Open the application with the controller unplugged.
+3. Connect the controller by USB-C and turn it on. For the Ultimate 2C
+   **Bluetooth** model, if it is not detected, turn it off, hold **L1 + R1**,
+   and plug it in. That model is **not supported by this patch**.
+4. Choose the firmware/update option, select the latest version, and click
+   **Update**.
+5. Keep the cable connected until the progress completes and the controller
+   vibrates or confirms completion, then unplug it.
+
+Afterward, run `windows\read-firmware.bat`. It must report **1.09**. If it does
+not, do not use this repository's pinned `--flash`/`--restore` artifacts.
+
+You can get the controller onto official v1.09 either with Ultimate Software V2
+or with the pinned image downloaded by `windows\fetch-firmware.bat` in section
+4. The patch itself always uses the pinned v1.09 DAT. If 8BitDo later releases
+something newer than 1.09, this patch does not support it.
+
+## 6. Read and preserve YOUR controller's stock state
 
 1. Turn the controller fully off (hold **Home** for three seconds).
 2. Connect it **directly** to the PC with a USB **data** cable. Do not hold any
@@ -285,7 +319,7 @@ Image-only check completed; no hardware accessed.
 If any hash, the stock application comparison, the bootloader/tail, or the
 update metadata check fails, **stop**. Do not edit files to get past a check.
 
-## 6. Validate recovery BEFORE flashing
+## 7. Validate recovery BEFORE flashing
 
 This is the most important safety step.
 
@@ -338,7 +372,7 @@ of normal startup; the controller must actually come back.
 If recovery entry, reading, reset or normal startup fails, **stop without
 flashing**. Do not try alternate boot packets.
 
-## 7. Flash the patch (only after section 6 passed)
+## 8. Flash the patch (only after section 7 passed)
 
 1. Power off completely.
 2. Hold **LB + RB** and reconnect USB.
@@ -382,7 +416,7 @@ If anything fails, the tool prints `STOPPED` and does **not** reset or retry.
 Keep the controller in BOOT reach, preserve all snapshots, and read the reported
 failure before doing anything. Do not blindly re-flash.
 
-## 8. Fresh pairing and acceptance checks
+## 9. Fresh pairing and acceptance checks
 
 ### Apple TV (the actual target)
 
@@ -423,7 +457,7 @@ Windows and Apple TV. The name is not changed to SN30 Pro+.
 
 ## Restore the original stock firmware
 
-You need the original DAT and all four snapshots from section 5.
+You need the original DAT and all four snapshots from section 6.
 
 1. Power off, hold **LB + RB**, reconnect USB, confirm `2dc8:3208`.
 2. Run:
@@ -439,40 +473,6 @@ It verifies before reset. Do not unplug during the restore.
 
 Pair again from scratch after restoring. This is a recovery capability, not a
 guarantee against every possible failure.
-
-## Official 8BitDo firmware updates
-
-This project patches **only v1.09**. **As of 2025, v1.09 is the latest official
-8BitDo firmware for the Ultimate 2C Wireless.** Controllers often ship with
-older stock firmware, so update to v1.09 with Ultimate Software V2 before
-making the section 5 backups. A vendor update can also overwrite the
-compatibility patch, so restore stock first if you update after patching.
-
-Use 8BitDo Ultimate Software V2:
-
-```text
-https://app.8bitdo.com/Ultimate-Software-V2/
-```
-
-Windows/macOS vendor procedure:
-
-1. Install Ultimate Software V2; extract the ZIP first if needed.
-2. Open the application with the controller unplugged.
-3. Connect the controller by USB-C and turn it on. For the Ultimate 2C
-   **Bluetooth** model, if it is not detected, turn it off, hold **L1 + R1**,
-   and plug it in. That model is **not supported by this patch**.
-4. Choose the firmware/update option, select the latest version, and click
-   **Update**.
-5. Keep the cable connected until the progress completes and the controller
-   vibrates or confirms completion, then unplug it.
-
-Afterward, run `windows\read-firmware.bat`. It must report **1.09**. If it does
-not, do not use this repository's pinned `--flash`/`--restore` artifacts.
-
-You can get the controller onto official v1.09 either with Ultimate Software V2
-or with the pinned image downloaded by `windows\fetch-firmware.bat` in section
-4. The patch itself always uses the pinned v1.09 DAT. If 8BitDo later releases
-something newer than 1.09, this patch does not support it.
 
 ## Troubleshooting
 
