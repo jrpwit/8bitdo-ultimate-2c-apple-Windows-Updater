@@ -210,8 +210,10 @@ variable.
 This project patches **only v1.09**. **As of 2025, v1.09 is the latest official
 8BitDo firmware for the Ultimate 2C Wireless.** Controllers often ship with
 older stock firmware, so update to v1.09 with Ultimate Software V2 before
-making the section 6 backups. A vendor update can also overwrite the
-compatibility patch, so restore stock first if you update after patching.
+making the section 6 backups. If `windows\read-firmware.bat` already reports
+1.09, skip the vendor update and continue to section 6. A vendor update can
+also overwrite the compatibility patch, so restore stock first if you update
+after patching.
 
 Use 8BitDo Ultimate Software V2:
 

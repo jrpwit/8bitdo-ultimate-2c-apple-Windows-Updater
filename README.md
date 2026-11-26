@@ -236,6 +236,8 @@ This project patches **only official firmware v1.09**. **As of 2025, v1.09 is th
 
 Many controllers ship with older stock firmware. If yours is older than 1.09, update it to the latest **v1.09** with 8BitDo Ultimate Software V2 **before** making your backups in section 6. The patch cannot be applied to a controller that is still on older firmware.
 
+If `windows\read-firmware.bat` already reports **1.09**, skip the vendor update and continue to section 6.
+
 8BitDo provides Ultimate Software V2 here:
 
 ```text
