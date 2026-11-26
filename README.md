@@ -89,8 +89,8 @@ Before starting:
 1. Install 64-bit Python 3.12 (or use an existing supported 3.10–3.14 x64).
 2. Extract the project; open Command Prompt in the project folder.
 3. Run `windows\setup.bat`.
-4. Download the official v1.09 DAT and generate the patched DAT.
-5. If the controller is on older firmware, update it to the latest official **v1.09** with 8BitDo Ultimate Software V2.
+4. If the controller is on older firmware, update it to the latest official **v1.09** with 8BitDo Ultimate Software V2.
+5. Download the official v1.09 DAT and generate the patched DAT.
 6. In normal USB mode: confirm `2dc8:310a`, verify firmware `1.09`, save four snapshots, run `--check-image`.
 7. In LB+RB BOOT mode: confirm `2dc8:3208`, run `--verify-reset`, then confirm normal mode returns.
 8. In BOOT mode again: run `--flash`.
@@ -181,7 +181,51 @@ The `pygame` warning is optional only. On Python 3.14, setup uses `pygame-ce` (i
 
 Setup does **not** access or flash the controller.
 
-## 4. Download the exact firmware and generate the patch
+## 4. Update to official v1.09 — read this first
+
+This project patches **only official firmware v1.09**. **As of 2025, v1.09 is the latest official 8BitDo firmware for the Ultimate 2C Wireless.**
+
+Many controllers ship with older stock firmware. If yours is older than 1.09, update it to the latest **v1.09** with 8BitDo Ultimate Software V2 **before** making your backups in section 6. The patch cannot be applied to a controller that is still on older firmware.
+
+If `windows\read-firmware.bat` already reports **1.09**, skip the vendor update and continue to section 6.
+
+8BitDo provides Ultimate Software V2 here:
+
+```text
+https://app.8bitdo.com/Ultimate-Software-V2/
+```
+
+### Update via Ultimate Software V2 (Windows or macOS)
+
+1. Download and install **8BitDo Ultimate Software V2** for your operating system. If it downloads as a `.zip`, extract it first.
+2. Keep the controller unplugged while opening the application.
+3. Connect the controller with a USB-C cable and turn it on. For the Ultimate 2C **Bluetooth** model, if it is not detected immediately, turn it off, hold **L1 + R1**, and plug it in via USB.
+4. Select the firmware/update option, choose the latest firmware version, and click **Update**.
+5. Leave the cable connected until the progress bar finishes and the controller vibrates or confirms completion. Then unplug it.
+
+> The **L1 + R1** recovery note applies to the Ultimate 2C **Bluetooth (Switch)** model. That model is **not supported by this patch**. This project targets the Ultimate 2C Wireless (Windows/Android) model.
+
+> **The vendor updater does not apply this compatibility patch.** Ultimate Software V2 updates the controller to official v1.09; it does not install the SN30 Pro+ identity patch. After updating to v1.09, continue with the backups and patch steps in this guide.
+
+After the vendor update, connect in normal USB mode and verify the real application version:
+
+```bat
+windows\read-firmware.bat
+```
+
+This workflow requires:
+
+```text
+Telink image header. Installed firmware version: 1.09 (raw 109).
+```
+
+If it reports anything else, **stop**. Do not run `--flash` or `--restore` with this repository's pinned v1.09 artifacts. If you want to use the vendor updater after patching, restore the stock firmware first; otherwise the update may overwrite the compatibility patch.
+
+You can get the controller onto official v1.09 either with Ultimate Software V2 or by using the pinned image downloaded by `windows\fetch-firmware.bat` in section 5. The patch itself always uses the pinned v1.09 DAT; after any vendor update, verify `1.09` with `windows\read-firmware.bat` before making backups.
+
+If 8BitDo later releases a firmware version newer than 1.09, this patch does not support it. Use the v1.09 workflow only, or wait for updated patch tooling.
+
+## 5. Download the exact firmware and generate the patch
 
 ```bat
 mkdir work
@@ -229,50 +273,6 @@ windows\test.bat
 ```
 
 Expected: `Ran 44 tests ... OK`. Open a new Command Prompt afterward, or run `set EIGHTBITDO_STOCK_DAT=`, to clear the variable.
-
-## 5. Update to official v1.09 — read this first
-
-This project patches **only official firmware v1.09**. **As of 2025, v1.09 is the latest official 8BitDo firmware for the Ultimate 2C Wireless.**
-
-Many controllers ship with older stock firmware. If yours is older than 1.09, update it to the latest **v1.09** with 8BitDo Ultimate Software V2 **before** making your backups in section 6. The patch cannot be applied to a controller that is still on older firmware.
-
-If `windows\read-firmware.bat` already reports **1.09**, skip the vendor update and continue to section 6.
-
-8BitDo provides Ultimate Software V2 here:
-
-```text
-https://app.8bitdo.com/Ultimate-Software-V2/
-```
-
-### Update via Ultimate Software V2 (Windows or macOS)
-
-1. Download and install **8BitDo Ultimate Software V2** for your operating system. If it downloads as a `.zip`, extract it first.
-2. Keep the controller unplugged while opening the application.
-3. Connect the controller with a USB-C cable and turn it on. For the Ultimate 2C **Bluetooth** model, if it is not detected immediately, turn it off, hold **L1 + R1**, and plug it in via USB.
-4. Select the firmware/update option, choose the latest firmware version, and click **Update**.
-5. Leave the cable connected until the progress bar finishes and the controller vibrates or confirms completion. Then unplug it.
-
-> The **L1 + R1** recovery note applies to the Ultimate 2C **Bluetooth (Switch)** model. That model is **not supported by this patch**. This project targets the Ultimate 2C Wireless (Windows/Android) model.
-
-> **The vendor updater does not apply this compatibility patch.** Ultimate Software V2 updates the controller to official v1.09; it does not install the SN30 Pro+ identity patch. After updating to v1.09, continue with the backups and patch steps in this guide.
-
-After the vendor update, connect in normal USB mode and verify the real application version:
-
-```bat
-windows\read-firmware.bat
-```
-
-This workflow requires:
-
-```text
-Telink image header. Installed firmware version: 1.09 (raw 109).
-```
-
-If it reports anything else, **stop**. Do not run `--flash` or `--restore` with this repository's pinned v1.09 artifacts. If you want to use the vendor updater after patching, restore the stock firmware first; otherwise the update may overwrite the compatibility patch.
-
-You can get the controller onto official v1.09 either with Ultimate Software V2 or by using the pinned image downloaded by `windows\fetch-firmware.bat` in section 4. The patch itself always uses the pinned v1.09 DAT; after any vendor update, verify `1.09` with `windows\read-firmware.bat` before making backups.
-
-If 8BitDo later releases a firmware version newer than 1.09, this patch does not support it. Use the v1.09 workflow only, or wait for updated patch tooling.
 
 ## 6. Read and preserve YOUR controller's stock state
 
