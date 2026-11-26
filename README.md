@@ -10,6 +10,14 @@ You run this installer from a **Windows PC**. After patching, the controller pre
 
 ## What this patch changes
 
+## About
+
+This repository is a **Windows-native installer and guarded toolchain** for the 8BitDo Ultimate 2C Wireless Controller. It reads and patches the exact official firmware v1.09 so **macOS and Apple TV** recognize the controller's Bluetooth input reports.
+
+Windows is used only as the computer that performs the backup and flash. The firmware target is Apple compatibility, not a Windows driver. The same workflow also supports restoring the original stock firmware from your own backups.
+
+The original macOS tools remain in `native/`; this project adds the Windows HID backend, Python tools, batch wrappers, safety checks, tests, and step-by-step Windows guide.
+
 Only **six bytes** of the exact official firmware v1.09:
 
 - two bytes: Bluetooth PnP product ID `2dc8:301b` → `2dc8:6002` (SN30 Pro+ compatibility identity);
