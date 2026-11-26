@@ -1,4 +1,4 @@
-# 8BitDo Ultimate 2C Wireless — Windows Installer for Apple Compatibility
+# 8BitDo Ultimate 2C Wireless — Windows updater for Apple Compatibility
 
 An experimental, identity-only firmware patch for the **8BitDo Ultimate 2C Wireless Controller** (the Windows/Android model).
 
@@ -12,7 +12,7 @@ You run this installer from a **Windows PC**. After patching, the controller pre
 
 ## About
 
-This repository is a **Windows-native installer and guarded toolchain** for the 8BitDo Ultimate 2C Wireless Controller. It reads and patches the exact official firmware v1.09 so **macOS and Apple TV** recognize the controller's Bluetooth input reports.
+This repository is a **Windows-native updater and guarded toolchain** for the 8BitDo Ultimate 2C Wireless Controller. It reads and patches the exact official firmware v1.09 so **macOS and Apple TV** recognize the controller's Bluetooth input reports.
 
 Windows is used only as the computer that performs the backup and flash. The firmware target is Apple compatibility, not a Windows driver. The same workflow also supports restoring the original stock firmware from your own backups.
 
