@@ -524,6 +524,10 @@ Checked for this Windows port:
 
 The underlying firmware patch was measured on one unit; Apple TV operation was user-confirmed after fresh pairing. This is not a universal compatibility guarantee.
 
+## Topics
+
+`8bitdo` · `8bitdo-ultimate-2c` · `apple-tv` · `mac` · `gaming` · `gaming-controller`
+
 ## Files, credits, and legal boundary
 
 - [Windows technical notes and diagnostics](WINDOWS.md)
