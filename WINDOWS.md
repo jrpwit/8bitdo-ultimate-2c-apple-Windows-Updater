@@ -440,10 +440,13 @@ guarantee against every possible failure.
 
 ## Official 8BitDo firmware updates
 
-This project patches **only v1.09** and cannot be applied to a newer vendor
-version. A vendor update can also overwrite the compatibility patch.
+This project patches **only v1.09**. **As of 2025, v1.09 is the latest official
+8BitDo firmware for the Ultimate 2C Wireless.** Controllers often ship with
+older stock firmware, so update to v1.09 with Ultimate Software V2 before
+making the section 5 backups. A vendor update can also overwrite the
+compatibility patch, so restore stock first if you update after patching.
 
-For normal stock updates or recovery, use 8BitDo Ultimate Software V2:
+Use 8BitDo Ultimate Software V2:
 
 ```text
 https://app.8bitdo.com/Ultimate-Software-V2/
@@ -461,10 +464,13 @@ Windows/macOS vendor procedure:
 5. Keep the cable connected until the progress completes and the controller
    vibrates or confirms completion, then unplug it.
 
-Afterward, run `windows\read-firmware.bat`. If it does not report **1.09**, do
-not use this repository's pinned `--flash`/`--restore` artifacts. The official
-updater is not a source for the exact pinned v1.09 image; use
-`windows\fetch-firmware.bat` for that.
+Afterward, run `windows\read-firmware.bat`. It must report **1.09**. If it does
+not, do not use this repository's pinned `--flash`/`--restore` artifacts.
+
+You can get the controller onto official v1.09 either with Ultimate Software V2
+or with the pinned image downloaded by `windows\fetch-firmware.bat` in section
+4. The patch itself always uses the pinned v1.09 DAT. If 8BitDo later releases
+something newer than 1.09, this patch does not support it.
 
 ## Troubleshooting
 

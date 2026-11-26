@@ -29,9 +29,11 @@ The patch was selected because the SN30 Pro+ profile understands this controller
 
 ## Official 8BitDo firmware updates — read this first
 
-This project patches **only official firmware v1.09**. It does not support newer firmware versions, and a vendor update can overwrite the compatibility patch.
+This project patches **only official firmware v1.09**. **As of 2025, v1.09 is the latest official 8BitDo firmware for the Ultimate 2C Wireless.**
 
-If you need to update the controller's stock firmware or recover it, 8BitDo provides **Ultimate Software V2**:
+Many controllers ship with older stock firmware. If yours is older than 1.09, update it to the latest **v1.09** with 8BitDo Ultimate Software V2 **before** making your backups in section 5. The patch cannot be applied to a controller that is still on older firmware.
+
+8BitDo provides Ultimate Software V2 here:
 
 ```text
 https://app.8bitdo.com/Ultimate-Software-V2/
@@ -47,9 +49,9 @@ https://app.8bitdo.com/Ultimate-Software-V2/
 
 > The **L1 + R1** recovery note applies to the Ultimate 2C **Bluetooth (Switch)** model. That model is **not supported by this patch**. This project targets the Ultimate 2C Wireless (Windows/Android) model.
 
-> **Do not use the vendor updater as a shortcut to install this patch.** The official updater installs 8BitDo's latest firmware, which may be newer than v1.09. This project's pinned hashes, offsets and patch cannot be applied to a different version.
+> **The vendor updater does not apply this compatibility patch.** Ultimate Software V2 updates the controller to official v1.09; it does not install the SN30 Pro+ identity patch. After updating to v1.09, continue with the backups and patch steps in this guide.
 
-After any vendor update, connect in normal USB mode and verify the real application version:
+After the vendor update, connect in normal USB mode and verify the real application version:
 
 ```bat
 windows\read-firmware.bat
@@ -63,7 +65,9 @@ Telink image header. Installed firmware version: 1.09 (raw 109).
 
 If it reports anything else, **stop**. Do not run `--flash` or `--restore` with this repository's pinned v1.09 artifacts. If you want to use the vendor updater after patching, restore the stock firmware first; otherwise the update may overwrite the compatibility patch.
 
-The exact v1.09 image used by this guide is obtained with `windows\fetch-firmware.bat` in section 4. The official updater is for normal stock maintenance and recovery, not for reproducing the pinned v1.09 starting point.
+You can get the controller onto official v1.09 either with Ultimate Software V2 or by using the pinned image downloaded by `windows\fetch-firmware.bat` in section 4. The patch itself always uses the pinned v1.09 DAT; after any vendor update, verify `1.09` with `windows\read-firmware.bat` before making backups.
+
+If 8BitDo later releases a firmware version newer than 1.09, this patch does not support it. Use the v1.09 workflow only, or wait for updated patch tooling.
 
 ## What the Windows port adds
 
@@ -127,11 +131,12 @@ Before starting:
 1. Install 64-bit Python 3.12 (or use an existing supported 3.10–3.14 x64).
 2. Extract the project; open Command Prompt in the project folder.
 3. Run `windows\setup.bat`.
-4. Download the official v1.09 DAT and generate the patched DAT.
-5. In normal USB mode: confirm `2dc8:310a`, read firmware `1.09`, save four snapshots, run `--check-image`.
-6. In LB+RB BOOT mode: confirm `2dc8:3208`, run `--verify-reset`, then confirm normal mode returns.
-7. In BOOT mode again: run `--flash`.
-8. Pair fresh on Apple TV and test every input.
+4. If the controller is on older firmware, update it to the latest official **v1.09** with 8BitDo Ultimate Software V2.
+5. Download the official v1.09 DAT and generate the patched DAT.
+6. In normal USB mode: confirm `2dc8:310a`, verify firmware `1.09`, save four snapshots, run `--check-image`.
+7. In LB+RB BOOT mode: confirm `2dc8:3208`, run `--verify-reset`, then confirm normal mode returns.
+8. In BOOT mode again: run `--flash`.
+9. Pair fresh on Apple TV and test every input.
 
 ---
 
