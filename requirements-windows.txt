@@ -1,0 +1,2 @@
+# Core Windows HID backend (import name: hid)
+hidapi>=0.14,<0.16

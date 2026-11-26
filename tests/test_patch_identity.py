@@ -72,7 +72,14 @@ class FetchOutputSafetyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             target = Path(directory) / "missing.dat"
             output = Path(directory) / "dangling.dat"
-            output.symlink_to(target)
+            try:
+                output.symlink_to(target)
+            except (OSError, NotImplementedError) as exc:
+                # Windows needs Developer Mode or admin rights to create
+                # symlinks. The production check is os.path.lexists(); the
+                # path-exists case and the dangling case cannot both be
+                # exercised without symlink support, so skip only this fixture.
+                self.skipTest(f"cannot create a test symlink here: {exc}")
             with mock_patch.object(fetch_firmware.urllib.request, "urlopen",
                                    side_effect=AssertionError("Dangling output must be rejected before network access")):
                 self.assertEqual(run_cli(fetch_firmware, output), 1)

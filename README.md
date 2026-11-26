@@ -4,6 +4,8 @@ An experimental, identity-only firmware patch for the **8BitDo Ultimate 2C Wirel
 
 **Result:** native Bluetooth input was measured on one Mac; the same controller's owner confirmed that it works correctly on Apple TV after fresh pairing. This is not an official 8BitDo update, Apple certification, or a guarantee for other hardware/OS versions. See [measured results and limitations](docs/VALIDATION.md).
 
+> **Windows users:** a complete Windows-native port of the reader, writer and observer lives in this repository, with one-click `.bat` wrappers and a step-by-step guide. Start at **[WINDOWS.md](WINDOWS.md)**. The firmware patch, hashes, flash boundaries and every safety guard are identical; the original macOS sources remain unchanged. Windows is the computer used to flash — the patch still targets macOS and Apple TV, not Windows drivers.
+
 ## What changes
 
 Only **six bytes** of the exact official controller firmware v1.09:
@@ -18,7 +20,7 @@ The final profile was selected because it uses the descriptor's logical stick ra
 ## Scope and risk — read before proceeding
 
 - **Only this model and exact v1.09 image.** NOT Ultimate 2C Bluetooth (Switch), Ultimate 2, Ultimate 2 Wireless, a receiver/dongle, or another 8BitDo model.
-- Installation requires a **Mac**, USB data cable, Xcode Command Line Tools, and Python 3.10+. Native tooling was exercised on an Apple Silicon Mac; other hosts are not validated.
+- The **macOS** workflow requires a Mac, USB data cable, Xcode Command Line Tools, and Python 3.10+. The **Windows** workflow requires Windows 10/11 (64-bit), a USB data cable, and Python 3.10+; see [WINDOWS.md](WINDOWS.md). Native tooling was exercised on an Apple Silicon Mac; the Windows port is checked offline and awaits first independent hardware validation.
 - **Firmware flashing can brick a controller.** Power loss, hardware variants, or protocol differences remain risks. A backup and recovery mode reduce risk; they do not eliminate it.
 - The public tools are adapted from the tested experiment for a **stock v1.09 starting point**. The adapted tools are checked offline; the working controller was not reflashed merely to test publication. See the validation boundary below.
 - Guarded commands pin the known image, bootloader and sector-tail hashes and require your own snapshots. If a check fails, **stop**. There is intentionally no `--force` option.
@@ -35,6 +37,8 @@ mkdir -p work
 ```
 
 If development tools are absent, install Apple's Command Line Tools first (`xcode-select --install`). Python must be available as `python3`.
+
+On Windows there is no `make` step: run `windows\setup.bat` instead and follow **[WINDOWS.md](WINDOWS.md)** from section 4 onward.
 
 `make` only compiles local source; it never contacts a controller. Keep `work/` private and backed up. `.gitignore` excludes firmware and dumps, but do not rely on that when sharing files manually.
 
@@ -153,6 +157,8 @@ Official updates can overwrite the compatibility patch. Do not patch a new firmw
 # Offline tests; the optional stock fixture remains local and untracked.
 EIGHTBITDO_STOCK_DAT="$PWD/work/original-v1.09-restore.dat" make test
 ```
+
+On Windows, run `windows\test.bat` instead. It runs the same offline suite; see [WINDOWS.md](WINDOWS.md) for the optional `EIGHTBITDO_STOCK_DAT` setting.
 
 When reporting a problem, include the exact controller model, firmware version, OS version, failed command and non-sensitive error text. **Do not attach full dumps, Bluetooth addresses or private logs.** A different bootloader/hash is an unsupported variant, not a reason to disable checks.
 

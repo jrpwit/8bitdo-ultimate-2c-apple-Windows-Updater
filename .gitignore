@@ -1,6 +1,8 @@
 # Firmware, per-device backups, generated binaries and local captures are private.
 /work/
 /build/
+/.venv/
+/issue/
 *.dat
 *.bin
 *.log

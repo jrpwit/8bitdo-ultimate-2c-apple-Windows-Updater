@@ -1,0 +1,5 @@
+# Optional: SDL joystick measurements for windows\observe-controller.bat.
+# pygame-ce is a drop-in replacement imported as "pygame" and provides a
+# CPython 3.14 Windows wheel; upstream pygame stops at 3.13 on Windows.
+pygame>=2.6; python_version < "3.14"
+pygame-ce>=2.5.8; python_version >= "3.14"
