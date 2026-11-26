@@ -9,8 +9,10 @@ in place; Windows uses Python equivalents under `tools/` and the wrappers under
 > **Read this first:** Windows is the **computer used to flash the controller**.
 > The patch itself still exists to make **macOS and Apple TV** recognize the
 > controller. It is **not** a Windows driver, and it does not promise better
-> Windows behavior. After patching, Windows may identify the controller as an
-> SN30 Pro+ over Bluetooth. The controller's USB identity is unchanged.
+> Windows behavior. The firmware uses the SN30 Pro+ compatibility profile
+> internally, but the advertised Bluetooth name remains
+> **8BitDo Ultimate 2C Wireless** on Windows and Apple TV. The controller's USB
+> identity is unchanged.
 
 > **Firmware flashing can brick a controller.** Power loss, a different hardware
 > variant or a protocol difference can leave it unusable. The guarded tools,
@@ -388,7 +390,7 @@ failure before doing anything. Do not blindly re-flash.
    **Settings → Remotes and Devices → Bluetooth**.
 2. On the controller, turn it on in **BT** mode and hold **Pair** for three
    seconds.
-3. Pair it afresh. The advertised name can still be
+3. Pair it afresh. The advertised name remains
    **8BitDo Ultimate 2C Wireless**.
 4. Test D-pad/left-stick menu navigation and a supported game: movement,
    right-stick camera, face buttons, shoulders and triggers.
@@ -415,9 +417,9 @@ prove Apple behavior.
 If the observer package was not installed, use the built-in tester instead: press `Win+R`,
 type `joy.cpl`, press Enter, select the controller, and open **Properties**.
 
-The patched Bluetooth identity is the SN30 Pro+ profile. Windows may label or
-map it differently from the stock controller. That is expected; the Apple
-target is what matters.
+The firmware selects the **SN30 Pro+ compatibility profile internally**, but
+the advertised Bluetooth name remains **8BitDo Ultimate 2C Wireless** on
+Windows and Apple TV. The name is not changed to SN30 Pro+.
 
 ## Restore the original stock firmware
 

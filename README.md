@@ -2,9 +2,9 @@
 
 An experimental, identity-only firmware patch for the **8BitDo Ultimate 2C Wireless Controller** (the Windows/Android model).
 
-You run this updater from a **Windows PC**. After patching, the controller presents the Bluetooth identity of an **SN30 Pro+**, so **macOS and Apple TV** recognize its existing input reports. No Mac is required to run it or flash the controller.
+You run this updater from a **Windows PC**. After patching, the controller uses the internal Bluetooth compatibility profile **SN30 Pro+**, while its advertised name remains **8BitDo Ultimate 2C Wireless**. That lets **macOS and Apple TV** recognize its existing input reports. No Mac is required to run it or flash the controller.
 
-> **Windows is only the flashing host.** This patch does **not** install a Windows driver and does not promise better Windows behavior. It does **not** install SN30 Pro+ firmware, add rumble, or add motion support. After patching, Windows may label the Bluetooth controller as an SN30 Pro+; that is expected.
+> **Windows is only the flashing host.** This patch does **not** install a Windows driver and does not promise better Windows behavior. It does **not** install SN30 Pro+ firmware, add rumble, or add motion support. The controller's advertised Bluetooth name remains **8BitDo Ultimate 2C Wireless** on Windows and Apple TV.
 
 > **Firmware flashing can brick a controller.** Power loss, a different hardware variant, or a protocol difference can leave it unusable. The guarded tools, backups, and LB+RB recovery mode reduce the risk; they do not eliminate it. There is deliberately no `--force` option.
 
@@ -436,7 +436,7 @@ If anything fails, the tool prints `STOPPED` and does **not** reset or retry. Ke
 1. Forget the old controller pairing on the Apple TV:
    **Settings → Remotes and Devices → Bluetooth**.
 2. Put the controller in **BT** mode and hold **Pair** for three seconds.
-3. Pair it afresh. The advertised name can still be
+3. Pair it afresh. The advertised name remains
    **8BitDo Ultimate 2C Wireless**.
 4. Test D-pad/left-stick menu navigation and a supported game: movement,
    right-stick camera, face buttons, shoulders, and triggers.
@@ -457,7 +457,7 @@ windows\observe-controller.bat 60
 
 If the observer package was not installed, use `joy.cpl` instead: press `Win+R`, type `joy.cpl`, press Enter, select the controller, and open **Properties**.
 
-The patched Bluetooth identity is the SN30 Pro+ profile. Windows may label or map it differently from the stock controller. That is expected; the Apple target is what matters.
+The firmware selects the **SN30 Pro+ compatibility profile internally**, but the advertised Bluetooth name remains **8BitDo Ultimate 2C Wireless** on Windows and Apple TV. The name is not changed to SN30 Pro+.
 
 ## Restore the original stock firmware
 

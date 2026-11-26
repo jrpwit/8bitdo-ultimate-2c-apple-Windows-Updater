@@ -16,6 +16,8 @@ Apple's local controller database uses identity-dependent input profiles. Two un
 
 The final Apple profile was located under `GameControllers-SDL.bundle/Personalities/v11720/p24578/r1/8BitDo_SN30_Pro+/Default.plist` on the tested Mac. This is a lookup observation, not a redistributed profile or an assertion that every OS includes the same database.
 
+The patch changes the internal Bluetooth PnP product ID to select that profile. It does **not** change the advertised Bluetooth name: the controller still appears as **8BitDo Ultimate 2C Wireless** on Windows and Apple TV.
+
 The reference signed-axis normalization is `2 * raw / 255 - 1` (Y polarity inverted for conventional up-positive coordinates). Apple's runtime additionally applies its own input processing; actual native released axes were measured as zero. The correction selects the matching existing profile rather than rewriting firmware input values or inventing missing buttons.
 
 ## Unchanged Bluetooth report contract
