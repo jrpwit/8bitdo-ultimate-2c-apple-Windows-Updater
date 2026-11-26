@@ -341,8 +341,14 @@ flashing**. Do not try alternate boot packets.
 1. Power off completely.
 2. Hold **LB + RB** and reconnect USB.
 3. Confirm `2dc8:3208` with `windows\list-devices.bat`.
-4. Keep the laptop on AC power. Do not sleep, close the lid, unplug, or start
-   other controller software.
+4. Keep the Windows PC on AC power. Do not sleep, close the lid, unplug, or
+   start other controller software.
+
+> **Do not disconnect USB or let the Windows PC sleep.** The writer checks the
+> live stock baseline and preserved regions before erasing. It replaces only the
+> two differing 4-KiB sectors, verifies erased bytes, respects 256-byte
+> programming-page boundaries, and reads back the complete application, sector
+> tail, bootloader and saved update regions before resetting.
 
 ```bat
 windows\boot-firmware.bat --flash work\patched-v1.09-BLE6002-r0001.dat

@@ -79,7 +79,7 @@ Save all four snapshots to new filenames:
 ./build/boot_firmware --check-image work/patched-v1.09-BLE6002-r0001.dat
 ```
 
-Each backup command only issues bounded reads and refuses an existing output. Do not proceed after an incomplete backup. The image check verifies that the raw application backup equals the official stock image, the bootloader/tail match the known supported variant, and saved update metadata has a valid checksum with no pending installation. These snapshots cover the regions relevant to this procedure, **not the entire flash chip**. Keep them and the stock DAT outside the laptop as well; never substitute another person's snapshots.
+Each backup command only issues bounded reads and refuses an existing output. Do not proceed after an incomplete backup. The image check verifies that the raw application backup equals the official stock image, the bootloader/tail match the known supported variant, and saved update metadata has a valid checksum with no pending installation. These snapshots cover the regions relevant to this procedure, **not the entire flash chip**. Keep them and the stock DAT outside the computer as well; never substitute another person's snapshots.
 
 ## 4. Validate recovery BEFORE flashing
 
@@ -110,7 +110,7 @@ Repeat the physical **power off → hold LB+RB → connect USB** recovery sequen
 ./build/boot_firmware --flash work/patched-v1.09-BLE6002-r0001.dat
 ```
 
-**Do not disconnect USB or let the Mac sleep.** The writer checks the live stock baseline and preserved regions before erasing. It replaces only the two differing 4-KiB sectors, verifies erased bytes, respects 256-byte programming-page boundaries, and reads back the complete application, sector tail, bootloader and saved update regions before resetting.
+**Do not disconnect USB or let the computer sleep** — on Windows, the host is your Windows PC. The writer checks the live stock baseline and preserved regions before erasing. It replaces only the two differing 4-KiB sectors, verifies erased bytes, respects 256-byte programming-page boundaries, and reads back the complete application, sector tail, bootloader and saved update regions before resetting.
 
 If a transfer/verification fails: **do not retry the flash or reset blindly**. The tool stops without automatic reset; preserve BOOT access and all backups. Read the reported failure before attempting recovery. The stock baseline check intentionally prevents rerunning `--flash` on an already patched controller.
 
@@ -132,7 +132,7 @@ While the observer is running, exercise each D-pad direction and diagonal, sweep
 
 ### Apple TV
 
-1. Disconnect/forget the controller on the Mac so it cannot reclaim the connection.
+1. Disconnect/forget the controller on any other computer (Mac or Windows) so it cannot reclaim the connection.
 2. Apple TV: Settings → Remotes and Devices → Bluetooth → forget the old controller pairing.
 3. Enter pairing mode and pair afresh.
 4. Test D-pad/left-stick menu navigation and a controller-supported game, including movement, right-stick camera where supported, buttons and triggers.
